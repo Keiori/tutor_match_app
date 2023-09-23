@@ -19,7 +19,12 @@
         <!-- Sex -->
         <div>
             <x-input-label for="sex" :value="__('性別')" />
-            <x-text-input id="sex" class="block mt-1 w-full" type="number" name="sex" :value="old('sex')" required autofocus autocomplete="sex" />
+            <select id="sex" name="sex" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
+                <option hidden value="">--性別を選択してください--</option>
+                <option value="0">男</option>
+                <option value="1">女</option>
+                <option value="2">その他</option>
+            </select>
             <x-input-error :messages="$errors->get('sex')" class="mt-2" />
         </div>
 
@@ -33,14 +38,28 @@
         <!-- Institution -->
         <div>
             <x-input-label for="institution" :value="__('所属')" />
-            <x-text-input id="institution" class="block mt-1 w-full" type="number" name="institution" :value="old('institution')" required autofocus autocomplete="institution" />
+            <select id="institution" name="institution" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
+                <option hidden value="">--所属を選択してください--</option>
+                <option value="0">大学</option>
+                <option value="1">大学院</option>
+                <option value="2">社会人</option>
             <x-input-error :messages="$errors->get('institution')" class="mt-2" />
+            </select>
         </div>
         
         <!-- Grade -->
         <div>
             <x-input-label for="grade" :value="__('学年')" />
-            <x-text-input id="grade" class="block mt-1 w-full" type="number" name="grade" :value="old('grade')" required autofocus autocomplete="grade" />
+            <select id="grade" name="grade" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
+                <option hidden value="">--学年を選択してください--</option>
+                <option value="0">大学1年生</option>
+                <option value="1">大学2年生</option>
+                <option value="2">大学3年生</option>
+                <option value="3">大学4年生</option>
+                <option value="4">修士1年生</option>
+                <option value="5">修士2年生</option>
+                <option value="6">社会人</option>
+            </select>
             <x-input-error :messages="$errors->get('grade')" class="mt-2" />
         </div>
 
@@ -75,12 +94,12 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('admin.login') }}">
+                {{ __('既に登録済みの方はこちら') }}
             </a>
 
             <x-primary-button class="ml-4">
-                {{ __('Register') }}
+                {{ __('登録') }}
             </x-primary-button>
         </div>
     </form>

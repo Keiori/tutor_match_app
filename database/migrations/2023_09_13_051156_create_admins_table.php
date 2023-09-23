@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('age');
             $table->integer('institution');
             $table->integer('grade');
-            $table->string('teach_experience')->nullable();
+            $table->integer('teach_experience')->nullable();
             $table->text('record')->nullable();
             $table->text('comment')->nullable();
             $table->string('portrait_url')->nullable();

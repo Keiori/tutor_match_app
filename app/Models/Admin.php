@@ -20,6 +20,11 @@ class Admin extends Authenticatable
         'age',
         'institution',
         'grade',
+        'teach_experience',
+        'record',
+        'comment',
+        'portrait_url',
+        'zoom_link',
         'email',
         'password',
     ];
@@ -72,5 +77,14 @@ class Admin extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+    
+    public function is_subject($admin_id, $subject_id)
+    {
+        $check = \DB::table('admin_subject')
+                ->where('admin_id', $admin_id)
+                ->where('subject_id', $subject_id)
+                ->count();
+        return $check;
     }
 }

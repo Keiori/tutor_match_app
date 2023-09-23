@@ -1,30 +1,34 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\Admin\AdminProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Subject;
+use App\Models\Admin;
 
-class ProfileController extends Controller
+class ProfileOfAdminController extends Controller
 {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request, Subject $subject): View
     {
-        return view('profile.edit', [
+        return view('admin.profile.edit', [
             'user' => $request->user(),
+            'subjects' => $subject->all(),
         ]);
     }
-
+    
+    
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(AdminProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
 
@@ -33,8 +37,12 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+        
+        $subjects = $request->subjects_array;
+        Auth::guard('admin')->user()->subjects()->detach();
+        Auth::guard('admin')->user()->subjects()->attach($subjects);
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('admin.profile.edit')->with('status', 'profile-updated');
     }
 
     /**
