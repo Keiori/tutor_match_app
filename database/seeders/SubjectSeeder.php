@@ -16,24 +16,22 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('subjects')->insert(
-            ['name' => '中学英語'],
-            ['name' => '中学数学'],
-            ['name' => '中学国語'],
-            ['name' => '中学理科'],
-            ['name' => '中学社会'],
-            ['name' => '高校英語'],
-            ['name' => '高校数学'],
-            ['name' => '現代文'],
-            ['name' => '古典'],
-            ['name' => '物理'],
-            ['name' => '化学'],
-            ['name' => '生物'],
-            ['name' => '地学'],
-            ['name' => '日本史'],
-            ['name' => '世界史'],
-            ['name' => '地理'],
-            ['name' => '倫理/政治経済']
-        );
+        DB::table('subjects')->insert(['name' => '中学英語']);
+        DB::table('subjects')->insert(['name' => '中学数学']);
+        DB::table('subjects')->insert(['name' => '中学国語']);
+        DB::table('subjects')->insert(['name' => '中学理科']);
+        DB::table('subjects')->insert(['name' => '中学社会']);
+        DB::table('subjects')->insert(['name' => '高校英語']);
+        DB::table('subjects')->insert(['name' => '高校数学']);
+        DB::table('subjects')->insert(['name' => '現代文']);
+        DB::table('subjects')->insert(['name' => '古典']);
+        DB::table('subjects')->insert(['name' => '物理']);
+        DB::table('subjects')->insert(['name' => '化学']);
+        DB::table('subjects')->insert(['name' => '生物']);
+        DB::table('subjects')->insert(['name' => '地学']);
+        DB::table('subjects')->insert(['name' => '日本史']);
+        DB::table('subjects')->insert(['name' => '世界史']);
+        DB::table('subjects')->insert(['name' => '地理']);
+        DB::table('subjects')->insert(['name' => '倫理/政治経済']);
     }
 }
