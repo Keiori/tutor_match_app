@@ -8,16 +8,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
+use App\Models\Subject;
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request, Subject $subject): View
     {
         return view('profile.edit', [
             'user' => $request->user(),
+            'subjects' => $subject->all(),
         ]);
     }
 
@@ -33,6 +36,10 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+        
+        $subjects = $request->subjects_array;
+        Auth::guard('web')->user()->subjects()->detach();
+        Auth::guard('web')->user()->subjects()->attach($subjects);
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
