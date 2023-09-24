@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use App\Models\Subject;
 use App\Models\Admin;
+use App\Models\Subject;
+
 
 class ProfileOfAdminController extends Controller
 {

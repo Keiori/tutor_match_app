@@ -18,10 +18,10 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'family_name' => ['string', 'max:255'],
             'first_name' => ['string', 'max:255'],
-            'sex' => 'integer',
-            'grade' => 'integer',
-            'lesson_times' => 'integer',
-            'goal' => 'integer',
+            'sex' => 'string',
+            'grade' => 'string',
+            'lesson_times' => '',
+            'goal' => '',
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
         ];
     }

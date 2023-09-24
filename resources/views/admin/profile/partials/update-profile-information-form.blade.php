@@ -78,7 +78,7 @@
                 @foreach($subjects as $subject)
                     <input type="checkbox" value="{{ $subject->id }}" name="subjects_array[]" 
                         class="mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                        @if ($user->is_subject($user->id, $subject->id) == 1)
+                        @if ($user->admin_subject($user->id, $subject->id) == 1)
                             checked="checked"
                         @endif>
                             {{ $subject->name }}

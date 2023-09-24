@@ -22,6 +22,8 @@ class User extends Authenticatable
         'first_name',
         'sex',
         'grade',
+        'lesson_times',
+        'goal',
         'email',
         'password',
     ];
@@ -78,5 +80,14 @@ class User extends Authenticatable
     public function admins()
     {
         return $this->belongsToMany(Admin::class);
+    }
+    
+    public function subject_user($subject_id, $user_id)
+    {
+        $check = \DB::table('subject_user')
+                ->where('subject_id', $subject_id)
+                ->where('user_id', $user_id)
+                ->count();
+        return $check;
     }
 }

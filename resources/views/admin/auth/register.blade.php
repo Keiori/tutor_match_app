@@ -5,14 +5,14 @@
         <!-- Family Name -->
         <div>
             <x-input-label for="family_name" :value="__('姓')" />
-            <x-text-input id="family_name" class="block mt-1 w-full" type="text" name="family_name" :value="old('family_name')" required autofocus autocomplete="family_name" />
+            <x-text-input id="family_name" class="block mt-1 w-full" type="text" name="family_name" :value="old('family_name')" required/>
             <x-input-error :messages="$errors->get('family_name')" class="mt-2" />
         </div>
         
         <!-- First Name -->
         <div>
             <x-input-label for="first_name" :value="__('名')" />
-            <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="first_name" />
+            <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required/>
             <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
         </div>
         
@@ -31,7 +31,7 @@
         <!-- Age -->
         <div>
             <x-input-label for="age" :value="__('年齢')" />
-            <x-text-input id="age" class="block mt-1 w-full" type="number" name="age" :value="old('age')" required autofocus autocomplete="age" />
+            <x-text-input id="age" class="block mt-1 w-full" type="number" name="age" :value="old('age')" required/>
             <x-input-error :messages="$errors->get('age')" class="mt-2" />
         </div>
         

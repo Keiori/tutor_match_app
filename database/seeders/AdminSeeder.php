@@ -22,11 +22,21 @@ class AdminSeeder extends Seeder
                 'family_name' => '先生',
                 'first_name' => 'その壱',
                 'sex' => 0,
-                'age' => 21,
+                'age' => 19,
                 'institution' => 0,
-                'grade' => 3,
+                'grade' => 0,
                 'email' => 'teacher.first@gmail.com',
                 'password' => Hash::make('teacher1'),
+            ],
+            [
+                'family_name' => '先生',
+                'first_name' => 'その弍',
+                'sex' => 1,
+                'age' => 20,
+                'institution' => 0,
+                'grade' => 1,
+                'email' => 'teacher.second@gmail.com',
+                'password' => Hash::make('teacher2'),
             ],
         ]);
     }

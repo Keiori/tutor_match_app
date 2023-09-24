@@ -79,7 +79,7 @@ class Admin extends Authenticatable
         $this->notify(new ResetPasswordNotification($token));
     }
     
-    public function is_subject($admin_id, $subject_id)
+    public function admin_subject($admin_id, $subject_id)
     {
         $check = \DB::table('admin_subject')
                 ->where('admin_id', $admin_id)

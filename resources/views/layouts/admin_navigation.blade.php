@@ -68,7 +68,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                {{ __('ダッシュボード') }}
+                {{ __('トップページ') }}
             </x-responsive-nav-link>
         </div>
 
@@ -81,7 +81,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('admin.profile.edit')">
-                    {{ __('プロフィール編集') }}
+                    {{ __('プロフィール設定') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

@@ -21,7 +21,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard')->with([
+        'sex_options' => ['男', '女', 'その他'],
+        'grade_options' => ['中学1年生', '中学2年生', '中学3年生', '高校1年生', '高校2年生', '高校3年生', '既卒生'],
+        'goal_options' => ['受験', '学校フォロー', '内部進学']
+        ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -29,8 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
 
 require __DIR__.'/auth.php';
 
@@ -51,7 +53,5 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::delete('/profile', [ProfileOfAdminController::class, 'destroy'])->name('profile.destroy');
     });
     
-    
-
     require __DIR__.'/admin.php';
 });
