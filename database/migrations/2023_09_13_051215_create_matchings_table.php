@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('matchings', function (Blueprint $table) {
             $table->id();
-            $table->integer('is_accepted');
+            $table->integer('is_accepted')->default(0);
             $table->text('comment')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -69,11 +69,6 @@ class Admin extends Authenticatable
         return $this->belongsToMany(Subject::class);
     }
     
-    public function users()
-    {
-        return $this->belongsToMany(User::class);
-    }
-    
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
