@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProfileOfAdminController;
+use App\Http\Controllers\MatchingController;
+use App\Http\Controllers\Admin\MatchingOfAdminController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,6 +30,15 @@ Route::get('/dashboard', function () {
         ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+Route::get('/matching', [MatchingController::class, 'index'])->middleware(['auth', 'verified'])->name('matching');
+
+Route::get('/matching/apply/{admin}', [MatchingController::class, 'apply'])->name('apply');
+Route::get('/matching/cancel/{admin}', [MatchingController::class, 'cancel'])->name('cancel');
+Route::post('/matching/apply/{admin}', [MatchingController::class, 'apply'])->name('apply');
+Route::post('/matching/cancel/{admin}', [MatchingController::class, 'cancel'])->name('cancel');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -46,7 +57,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
             'teach_experience_options' => ['1年未満', '1年以上2年未満', '2年以上3年未満', '3年以上4年未満', '4年以上5年未満', '5年以上'],
             ]);
     })->middleware(['auth:admin', 'verified'])->name('dashboard');
-
+    
+    Route::get('/matching', [MatchingOfAdminController::class, 'index'])->middleware(['auth:admin', 'verified'])->name('matching');
+    Route::post('/matching/accept/{matching}', [MatchingOfAdminController::class, 'accept'])->middleware(['auth:admin', 'verified'])->name('matching.accept');
+    Route::post('/matching/reject/{matching}', [MatchingOfAdminController::class, 'reject'])->middleware(['auth:admin', 'verified'])->name('matching.reject');
+    
     Route::middleware('auth:admin')->group(function () {
         Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileOfAdminController::class, 'update'])->name('profile.update');

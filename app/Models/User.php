@@ -77,11 +77,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Subject::class);
     }
     
-    public function admins()
-    {
-        return $this->belongsToMany(Admin::class);
-    }
-    
     public function subject_user($subject_id, $user_id)
     {
         $check = \DB::table('subject_user')

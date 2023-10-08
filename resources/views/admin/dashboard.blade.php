@@ -53,7 +53,7 @@
                 <tr>
                     <th>指導歴</th>
                     <td>
-                        @if(Auth::user()->teach_experience == null)
+                        @if(Auth::user()->teach_experience === null)
                             未設定
                         @else
                             {{ $teach_experience_options[Auth::user()->teach_experience] }}
