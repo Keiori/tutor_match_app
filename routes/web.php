@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TopPageController;
+use App\Http\Controllers\Admin\TopPageOfAdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProfileOfAdminController;
 use App\Http\Controllers\MatchingController;
@@ -22,24 +24,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard')->with([
-        'sex_options' => ['男', '女', 'その他'],
-        'grade_options' => ['中学1年生', '中学2年生', '中学3年生', '高校1年生', '高校2年生', '高校3年生', '既卒生'],
-        'goal_options' => ['受験', '学校フォロー', '内部進学']
-        ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [TopPageController::class, 'index'])->name('dashboard');
+    
+    Route::get('/dashboard/show_schedule/{event}', [TopPageController::class, 'show'])->name('show_schedule');
+    
+    Route::get('/matching', [MatchingController::class, 'index'])->name('matching');
+    Route::get('/matching/apply/{admin}', [MatchingController::class, 'apply'])->name('apply');
+    Route::get('/matching/cancel/{admin}', [MatchingController::class, 'cancel'])->name('cancel');
+    Route::post('/matching/apply/{admin}', [MatchingController::class, 'apply'])->name('apply');
+    Route::post('/matching/cancel/{admin}', [MatchingController::class, 'cancel'])->name('cancel');
 
-Route::get('/matching', [MatchingController::class, 'index'])->middleware(['auth', 'verified'])->name('matching');
-
-Route::get('/matching/apply/{admin}', [MatchingController::class, 'apply'])->name('apply');
-Route::get('/matching/cancel/{admin}', [MatchingController::class, 'cancel'])->name('cancel');
-Route::post('/matching/apply/{admin}', [MatchingController::class, 'apply'])->name('apply');
-Route::post('/matching/cancel/{admin}', [MatchingController::class, 'cancel'])->name('cancel');
-
-
-Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -49,20 +45,21 @@ require __DIR__.'/auth.php';
 
 
 Route::prefix('admin')->name('admin.')->group(function(){
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard')->with([
-            'sex_options' => ['男', '女', 'その他'],
-            'institution_options' => ['大学', '大学院', '社会人'],
-            'grade_options' => ['大学1年生', '大学2年生', '大学3年生', '大学4年生', '修士1年生', '修士2年生', '社会人'],
-            'teach_experience_options' => ['1年未満', '1年以上2年未満', '2年以上3年未満', '3年以上4年未満', '4年以上5年未満', '5年以上'],
-            ]);
-    })->middleware(['auth:admin', 'verified'])->name('dashboard');
-    
-    Route::get('/matching', [MatchingOfAdminController::class, 'index'])->middleware(['auth:admin', 'verified'])->name('matching');
-    Route::post('/matching/accept/{matching}', [MatchingOfAdminController::class, 'accept'])->middleware(['auth:admin', 'verified'])->name('matching.accept');
-    Route::post('/matching/reject/{matching}', [MatchingOfAdminController::class, 'reject'])->middleware(['auth:admin', 'verified'])->name('matching.reject');
-    
-    Route::middleware('auth:admin')->group(function () {
+    Route::middleware(['auth:admin', 'verified'])->group(function () {
+        Route::get('/dashboard', [TopPageOfAdminController::class, 'index'])->name('dashboard');
+        
+        Route::get('/dashboard/add_schedule', [TopPageOfAdminController::class, 'add'])->name('add_schedule');
+        Route::post('/dashboard/store_schedule', [TopPageOfAdminController::class, 'store'])->name('store_schedule');
+        
+        Route::get('/dashboard/edit_schedule/{event}', [TopPageOfAdminController::class, 'edit'])->name('edit_schedule');
+        Route::put('/dashboard/update_schedule/{event}', [TopPageOfAdminController::class, 'update'])->name('update_schedule');
+        Route::delete('/dashboard/delete_schedule/{event}', [TopPageOfAdminController::class,'delete'])->name('delete_schedule');
+
+        
+        Route::get('/matching', [MatchingOfAdminController::class, 'index'])->name('matching');
+        Route::post('/matching/accept/{matching}', [MatchingOfAdminController::class, 'accept'])->name('matching.accept');
+        Route::post('/matching/reject/{matching}', [MatchingOfAdminController::class, 'reject'])->name('matching.reject');
+        
         Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileOfAdminController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileOfAdminController::class, 'destroy'])->name('profile.destroy');
