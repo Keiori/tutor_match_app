@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h1 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('マッチング(生徒)') }}
-        </h2>
+        </h1>
     </x-slot>
     
     <div class="py-12">
@@ -10,9 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <form method="get" action="{{ route('matching') }}" class="p-6 text-gray-900">
                     @csrf
-                    <h3 class="font-semibold text-xl text-gray-800 leading-loose">検索</h3>
+                    <h2 class="font-semibold text-xl text-gray-800 leading-loose">検索</h2>
                     <div>
-                        <h4 class="text-lg text-gray-800 leading-loose">指導教科</h4>
+                        <h3 class="text-lg text-gray-800 leading-loose">指導教科</h3>
                             @foreach($subjects as $subject)
                                 <input type="checkbox" value="{{ $subject->id }}" name="subjects_array[]" 
                                     class="mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
@@ -43,11 +43,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg text-gray-800 leading-loose">マッチング申請中</h3>
-                    @foreach($admins as $admin)
+                    @foreach($applying as $admin)
                         <div>
-                            @if ($matchings[$admin->id] === 0)
-                                {{ $admin->family_name }} {{ $admin->first_name }}
-                            @endif
+                            {{ $admin->admin->family_name }} {{ $admin->admin->first_name }}
                         </div>
                     @endforeach
                 </div>
@@ -60,11 +58,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg text-gray-800 leading-loose">マッチング承認済</h3>
-                    @foreach($admins as $admin)
+                    @foreach($is_applied as $admin)
                         <div>
-                            @if ($matchings[$admin->id] === 1)
-                                {{ $admin->family_name }} {{ $admin->first_name }}
-                            @endif
+                            {{ $admin->admin->family_name }} {{ $admin->admin->first_name }}
                         </div>
                     @endforeach
                 </div>

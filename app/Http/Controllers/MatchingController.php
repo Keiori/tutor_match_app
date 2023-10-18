@@ -13,19 +13,26 @@ class MatchingController extends Controller
 {
     public function index(Admin $admin, Matching $matching, Request $request)
     {
+        // allの部分をtake等を使うことによって取得件数を限定
         $admins = $admin->all();
+        // 講師一覧
         $matchings = [];
+        // 申請中
+        $applying = $matching->where('user_id', Auth::id())->where('is_accepted', 0)->get();
+        // 承認済
+        $is_applied = $matching->where('user_id', Auth::id())->where('is_accepted', 1)->get();
         
+        // 講師一覧を表示する際にボタンの切り替え処理
         foreach($admins as $admin) {
-            if ($matching->where('admin_id', $admin->id)->where('is_accepted', 0)->exists()) {
+            if ($matching->where('admin_id', $admin->id)->where('user_id', Auth::id())->where('is_accepted', 0)->exists()) {
                 $matchings[$admin->id] = 0;
-            }elseif ($matching->where('admin_id', $admin->id)->where('is_accepted', 1)->exists()) {
+            }elseif ($matching->where('admin_id', $admin->id)->where('user_id', Auth::id())->where('is_accepted', 1)->exists()) {
                 $matchings[$admin->id] = 1;
             }else {
                 $matchings[$admin->id] = 2;
             }
         }
-        
+
         $subjects = Subject::all();
         $search_admins = $admin->all();
         $selected = $request['subjects_array'];
@@ -46,7 +53,14 @@ class MatchingController extends Controller
             }
         }
 
-        return view('matching')->with(['admins'=>$admins, 'matchings'=>$matchings, 'subjects'=>$subjects, 'search_results'=>$search_results]);
+        return view('matching')->with([
+            'admins'=>$admins, 
+            'matchings'=>$matchings, 
+            'subjects'=>$subjects, 
+            'search_results'=>$search_results, 
+            'applying'=>$applying,
+            'is_applied'=>$is_applied
+        ]);
     }
     
     

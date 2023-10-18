@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AdminSeeder::class,
             MatchingSeeder::class,
-            AdminSubjectSeeder::class
+            AdminSubjectSeeder::class,
+            EventSeeder::class
         ]);
     }
 }
