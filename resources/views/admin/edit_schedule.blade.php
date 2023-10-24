@@ -51,9 +51,8 @@
                                 <x-input-error class="mt-2" :messages="$errors->get('type')" />
                             </div>
                             <div>
-                                {{ $event->content }}
                                 <x-input-label for="content" :value="__('詳細内容')" />
-                                <textarea id="content" name="event[content]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" :value="old('content', $event->content)"></textarea>
+                                <textarea id="content" name="event[content]" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{ old('content', $event->content) }}</textarea>
                                 <x-input-error class="mt-2" :messages="$errors->get('content')" />
                             </div>
                             

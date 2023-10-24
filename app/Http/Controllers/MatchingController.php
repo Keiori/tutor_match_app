@@ -18,9 +18,9 @@ class MatchingController extends Controller
         // 講師一覧
         $matchings = [];
         // 申請中
-        $applying = $matching->where('user_id', Auth::id())->where('is_accepted', 0)->get();
+        $appliers = $matching->where('user_id', Auth::id())->where('is_accepted', 0)->get();
         // 承認済
-        $is_applied = $matching->where('user_id', Auth::id())->where('is_accepted', 1)->get();
+        $matchers = $matching->where('user_id', Auth::id())->where('is_accepted', 1)->get();
         
         // 講師一覧を表示する際にボタンの切り替え処理
         foreach($admins as $admin) {
@@ -54,15 +54,30 @@ class MatchingController extends Controller
         }
 
         return view('matching')->with([
-            'admins'=>$admins, 
-            'matchings'=>$matchings, 
-            'subjects'=>$subjects, 
-            'search_results'=>$search_results, 
-            'applying'=>$applying,
-            'is_applied'=>$is_applied
+            'admins' => $admins, 
+            'matchings' => $matchings, 
+            'subjects' => $subjects, 
+            'search_results' => $search_results, 
+            'appliers' => $appliers,
+            'matchers' => $matchers
         ]);
     }
     
+    public function show_profile(Admin $admin)
+    {
+        $sex_options = ['男', '女', 'その他'];
+        $institution_options = ['大学', '大学院', '社会人'];
+        $grade_options = ['大学1年生', '大学2年生', '大学3年生', '大学4年生', '修士1年生', '修士2年生', '社会人'];
+        $teach_experience_options = ['1年未満', '1年以上2年未満', '2年以上3年未満', '3年以上4年未満', '4年以上5年未満', '5年以上'];
+        
+        return view('show_profile')->with([
+            'sex_options' => $sex_options,
+            'institution_options' => $institution_options,
+            'grade_options' => $grade_options,
+            'teach_experience_options' => $teach_experience_options,
+            'admin' => $admin
+        ]);
+    }
     
     public function apply(Matching $matching, Admin $admin)
     {

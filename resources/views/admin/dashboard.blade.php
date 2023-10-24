@@ -107,12 +107,14 @@
                                     {{ $future_event->date->format('Y年n月j日') }}
                                     {{ \Carbon\Carbon::parse($future_event->start_time)->format('H:i') }}
                                         〜 {{ \Carbon\Carbon::parse($future_event->end_time)->format('H:i') }}
+                                    
                                     @if($future_event->type == 0)
                                         授業
                                     @else
                                         面談
                                     @endif
-                                    {{ $future_event->user_id }}
+                                    
+                                    {{ $future_event->user->family_name }} {{ $future_event->user->first_name }}
                                 </a>
                             </div>
                         @endforeach
@@ -140,7 +142,8 @@
                                     @else
                                         面談
                                     @endif
-                                    {{ $future_event->user_id }}
+                                    
+                                    {{ $past_event->user->family_name }} {{ $past_event->user->first_name }}
                             </div>
                         @endforeach
                 </div>
