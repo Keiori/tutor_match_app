@@ -16,23 +16,24 @@ class MatchingController extends Controller
         // allの部分をtake等を使うことによって取得件数を限定
         $admins = $admin->all();
         // 講師一覧
-        $matchings = [];
-        // 申請中
+        $matching_admins = [];
+        // 申請中講師
         $appliers = $matching->where('user_id', Auth::id())->where('is_accepted', 0)->get();
-        // 承認済
+        // 承認済講師
         $matchers = $matching->where('user_id', Auth::id())->where('is_accepted', 1)->get();
         
         // 講師一覧を表示する際にボタンの切り替え処理
         foreach($admins as $admin) {
             if ($matching->where('admin_id', $admin->id)->where('user_id', Auth::id())->where('is_accepted', 0)->exists()) {
-                $matchings[$admin->id] = 0;
+                $matching_admins[$admin->id] = 0;
             }elseif ($matching->where('admin_id', $admin->id)->where('user_id', Auth::id())->where('is_accepted', 1)->exists()) {
-                $matchings[$admin->id] = 1;
+                $matching_admins[$admin->id] = 1;
             }else {
-                $matchings[$admin->id] = 2;
+                $matching_admins[$admin->id] = 2;
             }
         }
-
+        
+        // 指導教科による検索機能
         $subjects = Subject::all();
         $search_admins = $admin->all();
         $selected = $request['subjects_array'];
@@ -55,7 +56,7 @@ class MatchingController extends Controller
 
         return view('matching')->with([
             'admins' => $admins, 
-            'matchings' => $matchings, 
+            'matching_admins' => $matching_admins, 
             'subjects' => $subjects, 
             'search_results' => $search_results, 
             'appliers' => $appliers,
