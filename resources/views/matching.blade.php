@@ -93,11 +93,11 @@
                                 @endif
                             </div>
                             <div>
-                                @if ($matchings[$admin->id] === 0)
+                                @if ($matching_admins[$admin->id] === 0)
                                     <a href="{{ route('cancel', ['admin'=>$admin->id]) }}" class="btn btn-success btn-sm">
                                         申請取消
                                     </a>
-                                @elseif ($matchings[$admin->id] === 1)
+                                @elseif ($matching_admins[$admin->id] === 1)
                                     マッチング成立
                                 @else
                                     <a href="{{ route('apply', ['admin'=>$admin->id]) }}" class="btn btn-secondary btn-sm">
