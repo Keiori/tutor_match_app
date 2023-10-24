@@ -36,74 +36,78 @@
         </div>
     </div>
                     
-                    
-    
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h3 class="font-semibold text-lg text-gray-800 leading-loose">マッチング申請中</h3>
-                    @foreach($applying as $admin)
-                        <div>
-                            {{ $admin->admin->family_name }} {{ $admin->admin->first_name }}
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg text-gray-800 leading-loose">マッチング承認済</h3>
-                    @foreach($is_applied as $admin)
+                    @foreach($matchers as $matcher)
                         <div>
-                            {{ $admin->admin->family_name }} {{ $admin->admin->first_name }}
+                            <a href="/matching/show_profile/{{ $matcher->id }}">
+                                {{ $matcher->admin->family_name }} {{ $matcher->admin->first_name }}
+                            </a>
                         </div>
                     @endforeach
                 </div>
             </div>
         </div>
-    </div>
-    
-    
+    </div>             
     
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
-                <h3 class="font-semibold text-lg text-gray-800 leading-loose">講師一覧</h3>
-                
-                @foreach($admins as $admin)
-                    <form action="/matching/{{ $admin->id }}" method="POST">
-                        @csrf
-                        <div>{{ $admin->family_name }} {{ $admin->first_name }}</div>
-                        <div>
-                            @if ($admin->subjects->isEmpty())
-                                　指導教科　--未設定--
-                            @else
-                                　指導教科 : 
-                                @foreach ($admin->subjects as $subject)
-                                    {{ $subject->name }}
-                                @endforeach
-                            @endif
-                        </div>
-                        <div>
-                            @if ($matchings[$admin->id] === 0)
-                                <a href="{{ route('cancel', ['admin'=>$admin->id]) }}" class="btn btn-success btn-sm">
-                                    申請取消
-                                </a>
-                            @elseif ($matchings[$admin->id] === 1)
-                                マッチング成立
-                            @else
-                                <a href="{{ route('apply', ['admin'=>$admin->id]) }}" class="btn btn-secondary btn-sm">
-                                    申請
-                                </a>
-                            @endif
-                        </div>
-                    </form>
+                <h3 class="font-semibold text-lg text-gray-800 leading-loose">マッチング申請中</h3>
+                @foreach($appliers as $applier)
+                    <div>
+                        <a href="/matching/show_profile/{{ $applier->id }}">
+                            {{ $applier->admin->family_name }} {{ $applier->admin->first_name }}
+                        </a>
+                    </div>
                 @endforeach
+            </div>
+        </div>
+    </div>
+    
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <h3 class="font-semibold text-lg text-gray-800 leading-loose">講師一覧</h3>
+                
+                    @foreach($admins as $admin)
+                        <form action="/matching/{{ $admin->id }}" method="POST">
+                            @csrf
+                            <div>
+                                <a href="/matching/show_profile/{{ $admin->id }}">
+                                    {{ $admin->family_name }} {{ $admin->first_name }}
+                                </a>
+                            </div>
+                            <div>
+                                @if ($admin->subjects->isEmpty())
+                                    　指導教科　--未設定--
+                                @else
+                                    　指導教科 : 
+                                    @foreach ($admin->subjects as $subject)
+                                        {{ $subject->name }}
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div>
+                                @if ($matchings[$admin->id] === 0)
+                                    <a href="{{ route('cancel', ['admin'=>$admin->id]) }}" class="btn btn-success btn-sm">
+                                        申請取消
+                                    </a>
+                                @elseif ($matchings[$admin->id] === 1)
+                                    マッチング成立
+                                @else
+                                    <a href="{{ route('apply', ['admin'=>$admin->id]) }}" class="btn btn-secondary btn-sm">
+                                        申請
+                                    </a>
+                                @endif
+                            </div>
+                        </form>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

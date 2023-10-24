@@ -24,7 +24,7 @@ class EventSeeder extends Seeder
                 'start_time' => '12:00:00',
                 'end_time' => '14:00:00',
                 'type' => 1,
-                'content' => '面談',
+                'content' => '面談①',
             ],
             [
                 'user_id' => 2,

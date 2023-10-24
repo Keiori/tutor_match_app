@@ -44,9 +44,9 @@ class Admin extends Authenticatable
         return $this->hasMany(Matching::class);
     }
     
-    public function messages()
+    public function chattings()
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Chatting::class);
     }
     
     public function reviews()
