@@ -19,13 +19,15 @@
                                     {{ $subject->name }}
                             @endforeach
                     </div>
-                    <input type="submit" value="検索">
+                    <button type="submit">検索</button>
                     
                     <h3 class="font-semibold text-lg text-gray-800 leading-loose">検索結果</h3>
                         @if (!empty($search_results))
                             @foreach($search_results as $search_result)
                                 <div>
-                                    {{ $search_result->family_name }} {{ $search_result->first_name }}
+                                    <a href="/matching/show_profile/{{ $search_result->id }}">
+                                        {{ $search_result->family_name }} {{ $search_result->first_name }}
+                                    </a>
                                 </div>
                             @endforeach
                         @else
@@ -43,7 +45,7 @@
                     <h3 class="font-semibold text-lg text-gray-800 leading-loose">マッチング承認済</h3>
                     @foreach($matchers as $matcher)
                         <div>
-                            <a href="/matching/show_profile/{{ $matcher->id }}">
+                            <a class="text-black hover:text-blue-700 hover:underline hover:underline-offset-2" href="/matching/show_profile/{{ $matcher->admin->id }}">
                                 {{ $matcher->admin->family_name }} {{ $matcher->admin->first_name }}
                             </a>
                         </div>
@@ -59,7 +61,7 @@
                 <h3 class="font-semibold text-lg text-gray-800 leading-loose">マッチング申請中</h3>
                 @foreach($appliers as $applier)
                     <div>
-                        <a href="/matching/show_profile/{{ $applier->id }}">
+                        <a class="text-black hover:text-blue-700 hover:underline hover:underline-offset-2" href="/matching/show_profile/{{ $applier->admin->id }}">
                             {{ $applier->admin->family_name }} {{ $applier->admin->first_name }}
                         </a>
                     </div>
@@ -78,7 +80,7 @@
                         <form action="/matching/{{ $admin->id }}" method="POST">
                             @csrf
                             <div>
-                                <a href="/matching/show_profile/{{ $admin->id }}">
+                                <a class="text-black hover:text-blue-700 hover:underline hover:underline-offset-2" href="/matching/show_profile/{{ $admin->id }}">
                                     {{ $admin->family_name }} {{ $admin->first_name }}
                                 </a>
                             </div>

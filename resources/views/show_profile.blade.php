@@ -84,7 +84,7 @@
                     </tr>
                     </table>
                     <div>
-                        <a href="/matching">戻る</a>
+                        <a href="javascript:history.back();">戻る</a>
                     </div>
                 </div>
             </div>
