@@ -16,7 +16,7 @@
                                 @if (Auth::user()->portrait_url)
                                     <img class="w-auto h-40" src="{{ Auth::user()->portrait_url }}">
                                 @else
-                                    <img src="/storage/icon_user.png" width="250" height="250">
+                                    <img src="/storage/app/public/icon_user.png" width="250" height="250">
                                 @endif
                             </div>
                             <div class="mx-4 col-span-2 underline underline-offset-4 text-center">{{ Auth::user()->family_name }} {{ Auth::user()->first_name }}</div>
