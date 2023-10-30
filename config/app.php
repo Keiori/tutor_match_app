@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Tutor&Student_Matching'),
 
     /*
     |--------------------------------------------------------------------------
@@ -196,6 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         
         CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 

@@ -4,7 +4,11 @@
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
-
+        
+        <div>
+            <h1 class="font-semibold text-lg text-gray-800 leading-loose">生徒ログインページ</h1>
+        </div>
+        
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('メールアドレス')" />
@@ -34,7 +38,7 @@
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                <a class="text-sm text-gray-600 hover:text-gray-900 rounded-md underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                     {{ __('パスワードを忘れた場合') }}
                 </a>
             @endif
@@ -44,4 +48,11 @@
             </x-primary-button>
         </div>
     </form>
+    
+    <div class="my-1">
+        <a class="font-medium text-gray-600 hover:text-blue-700 underline" href="/admin/register">新規登録の方はこちら</a>
+    </div>
+    <div class="my-2">
+        <a class="font-medium text-gray-600 hover:text-blue-700 underline" href="/admin/login">講師の方はこちら</a>
+    </div>
 </x-guest-layout>

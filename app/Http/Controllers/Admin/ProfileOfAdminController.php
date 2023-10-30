@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Admin;
 use App\Models\Subject;
+use Cloudinary;
+use Illuminate\Support\Facades\Storage;
+use InterventionImage;
 
 
 class ProfileOfAdminController extends Controller
@@ -36,9 +39,14 @@ class ProfileOfAdminController extends Controller
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
-
+        
+        if ($request->file('portrait_url')) {
+            $portrait_url = Cloudinary::upload($request->file('portrait_url')->getRealPath())->getSecurePath();
+            $request->user()->portrait_url = $portrait_url;
+        }
         $request->user()->save();
         
+        // 指導教科の表示
         $subjects = $request->subjects_array;
         Auth::guard('admin')->user()->subjects()->detach();
         Auth::guard('admin')->user()->subjects()->attach($subjects);
