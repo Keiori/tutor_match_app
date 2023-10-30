@@ -18,7 +18,7 @@
                                     <div class="w-96 my-1">
                                         <input type="checkbox" value="{{ $subject->id }}" name="subjects_array[]" 
                                             class="mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                            {{ in_array($subject->id, $selected) ? 'checked' : '' }}>
+                                                @if (!empty($selected)) {{ in_array($subject->id, $selected) ? 'checked' : '' }}@endif>
                                             {{ $subject->name }}
                                     </div>
                                 @endforeach
