@@ -18,7 +18,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <a href="/">
-                    <img src="/storage/app_logo.png" class="block w-auto h-20 fill-current text-gray-800"/>
+                    <img src="{{ asset('/storage/app_logo.png') }}" class="block w-auto h-20 fill-current text-gray-800"/>
                 </a>
             </div>
 
