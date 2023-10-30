@@ -49,21 +49,11 @@ class Admin extends Authenticatable
         return $this->hasMany(Chatting::class);
     }
     
-    public function reviews()
-    {
-        return $this->hasMany(Review::class);
-    }
-    
     public function events()
     {
         return $this->hasMany(Event::class);
     }
-    
-    public function feedbacks()
-    {
-        return $this->hasMany(Feedback::class);
-    }
-    
+
     public function subjects()
     {
         return $this->belongsToMany(Subject::class);
