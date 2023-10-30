@@ -54,7 +54,6 @@ require __DIR__.'/auth.php';
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['auth:admin', 'verified'])->group(function () {
         Route::get('/dashboard', [TopPageOfAdminController::class, 'index'])->name('dashboard');
-        
         Route::get('/dashboard/add_schedule', [TopPageOfAdminController::class, 'add'])->name('add_schedule');
         Route::post('/dashboard/store_schedule', [TopPageOfAdminController::class, 'store'])->name('store_schedule');
         Route::get('/dashboard/edit_schedule/{event}', [TopPageOfAdminController::class, 'edit'])->name('edit_schedule');
