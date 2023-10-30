@@ -40,7 +40,7 @@
                                 <button type="submit">送信</button>
                         </form>
                         <div>
-                            <a href="/chatting">講師選択画面に戻る</a>
+                            <a class="font-medium text-gray-700 hover:text-blue-700 underline" href="/chatting">講師選択画面に戻る</a>
                         </div>
                     </body>
                 </div>

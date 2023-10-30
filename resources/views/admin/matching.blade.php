@@ -56,18 +56,18 @@
                     @endforeach
                     
                     <script>
-                            function acceptMatching(id) {
-                                'use strict'
-                                if (confirm('一度承認するとマッチングが成立します。\nこの操作は取り消せません。\n本当に承認しても良いですか？')) {
-                                    document.getElementById(`form_${id}_accept`).submit();
-                                }
+                        function acceptMatching(id) {
+                            'use strict'
+                            if (confirm('一度承認するとマッチングが成立します。\nこの操作は取り消せません。\n本当に承認しても良いですか？')) {
+                                document.getElementById(`form_${id}_accept`).submit();
                             }
-                            function rejectMatching(id) {
-                                'use strict'
-                                if (confirm('本当に却下しますか？')) {
-                                    document.getElementById(`form_${id}_reject`).submit();
-                                }
+                        }
+                        function rejectMatching(id) {
+                            'use strict'
+                            if (confirm('本当に却下しますか？')) {
+                                document.getElementById(`form_${id}_reject`).submit();
                             }
+                        }
                     </script>
                 </div>
             </div>

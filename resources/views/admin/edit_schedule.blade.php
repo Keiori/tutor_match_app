@@ -74,7 +74,7 @@
                             }
                         </script>
                         <div>
-                            <a href="/admin/dashboard">戻る</a>
+                            <a class="font-medium text-gray-700 hover:text-blue-700 underline" href="/admin/dashboard">戻る</a>
                         </div>
                     </body>
                 </div>

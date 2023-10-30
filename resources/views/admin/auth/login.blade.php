@@ -4,7 +4,11 @@
 
     <form method="POST" action="{{ route('admin.login') }}">
         @csrf
-
+        
+        <div>
+            <h1 class="font-semibold text-lg text-gray-800 leading-loose">講師ログインページ</h1>
+        </div>
+        
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('メールアドレス')" />
@@ -44,4 +48,11 @@
             </x-primary-button>
         </div>
     </form>
+    
+    <div class="my-1">
+        <a class="font-medium text-gray-600 hover:text-blue-700 underline" href="/login">新規登録の方はこちら</a>
+    </div>
+    <div class="my-2">
+        <a class="font-medium text-gray-600 hover:text-blue-700 underline" href="/login">生徒の方はこちら</a>
+    </div>
 </x-guest-layout>

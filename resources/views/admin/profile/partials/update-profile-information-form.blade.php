@@ -13,7 +13,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('admin.profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('admin.profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -114,7 +114,13 @@
         
         <div>
             <x-input-label for="portrait_url" :value="__('プロフィール写真')" />
-            <x-text-input id="portrait_url" name="portrait_url" type="text" class="mt-1 block w-full" :value="old('portrait_url', $user->portrait_url)"/>
+            <input id="portrait_url" name="portrait_url" type="file" accept="image/*" style="display:none"/>
+            <button id="fileSelect" type="button" class="bg-gray-400 hover:bg-gray-600 text-white rounded px-2 py-1">画像を選択</button>
+            @if (!is_null($user->portrait_url))
+                画像が選択されています
+            @else
+                画像が未登録です
+            @endif
             <x-input-error class="mt-2" :messages="$errors->get('portrait_url')" />
         </div>
         
@@ -162,4 +168,14 @@
             @endif
         </div>
     </form>
+    <script>
+        const fileSelect = document.getElementById("fileSelect");
+        const fileElem = document.getElementById("portrait_url");
+        
+        fileSelect.addEventListener("click", (e) => {
+            if (portrait_url) {
+                portrait_url.click();
+            }
+        }, false);
+    </script>
 </section>

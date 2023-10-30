@@ -84,7 +84,7 @@
                     </tr>
                     </table>
                     <div>
-                        <a href="javascript:history.back();">戻る</a>
+                        <a class="font-medium text-gray-700 hover:text-blue-700 underline" href="javascript:history.back();">戻る</a>
                     </div>
                 </div>
             </div>

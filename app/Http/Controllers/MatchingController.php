@@ -54,10 +54,12 @@ class MatchingController extends Controller
             }
         }
 
+
         return view('matching')->with([
             'admins' => $admins, 
             'matching_admins' => $matching_admins, 
             'subjects' => $subjects, 
+            'selected' => $selected,
             'search_results' => $search_results, 
             'appliers' => $appliers,
             'matchers' => $matchers

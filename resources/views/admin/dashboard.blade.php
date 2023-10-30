@@ -8,11 +8,17 @@
     <div class="py-12">
         <div class"max-w-7xl mx-auto">
             <div class="w-full h-screen grid grid-rows-3 grid-cols-4 gap-4">
-                <div class="row-start-1 row-end-4 col-start-1 col-end-3 bg-white border-4 border-cyan-800 p-6 m-3">
+                <div class="row-start-1 row-end-4 col-start-1 col-end-3 bg-white border-4 border-cyan-800 rounded-lg p-6 m-3">
                     <h2 class="font-semibold text-xl text-gray-800 leading-loose">プロフィール</h2>
                         <div class="h-1/2 grid grid-rows-5 grid-cols-4">
                             <div class="col-span-4"></div>
-                            <div class="mx-4 rounded-full col-span-2 row-span-3 text-center bg-gray-300">Face Photo</div>
+                            <div class="mx-4 row-span-3 col-span-2 mx-auto">
+                                @if (Auth::user()->portrait_url)
+                                    <img class="w-auto h-40" src="{{ Auth::user()->portrait_url }}">
+                                @else
+                                    <img src="/storage/icon_user.png" width="250" height="250">
+                                @endif
+                            </div>
                             <div class="mx-4 col-span-2 underline underline-offset-4 text-center">{{ Auth::user()->family_name }} {{ Auth::user()->first_name }}</div>
                             <div class="mx-4 underline underline-offset-4 text-center">{{ $sex_options[Auth::user()->sex]}}</div>
                             <div class="mx-4 underline underline-offset-4 text-center">{{ Auth::user()->age }} 歳</div>
@@ -68,7 +74,7 @@
                 </div>
     
     
-                <div class="row-start-1 row-end-3 col-start-3 col-end-5 border-4 bg-white border-cyan-800 p-6 m-3">
+                <div class="row-start-1 row-end-3 col-start-3 col-end-5 border-4 bg-white border-cyan-800 rounded-lg p-6 m-3">
                     <div class="grid grid-rows-3 grid-cols-2">
                         <div class="row-start-1 row-end-2 col-start-1 col-end-2">
                             <h2 class="font-semibold text-xl text-gray-800 leading-loose">今後の予定一覧</h2>
@@ -98,7 +104,7 @@
                     </div>
                 </div>
     
-                <div class="row-start-3 row-end-4 col-start-3 col-end-5 bg-white border-4 border-cyan-800 p-6 m-3">
+                <div class="row-start-3 row-end-4 col-start-3 col-end-5 bg-white border-4 border-cyan-800 rounded-lg p-6 m-3">
                     <h2 class="font-semibold text-xl text-gray-800 leading-loose">過去の予定一覧</h2>
                         @foreach ($past_events as $past_event)
                             <div class="ml-4">

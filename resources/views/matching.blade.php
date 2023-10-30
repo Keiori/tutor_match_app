@@ -13,11 +13,16 @@
                     <h2 class="font-semibold text-xl text-gray-800 leading-loose">検索</h2>
                     <div>
                         <h3 class="text-lg text-gray-800 leading-loose">指導教科</h3>
-                            @foreach($subjects as $subject)
-                                <input type="checkbox" value="{{ $subject->id }}" name="subjects_array[]" 
-                                    class="mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                    {{ $subject->name }}
-                            @endforeach
+                            <div class="flex flex-wrap">
+                                @foreach($subjects as $subject)
+                                    <div class="w-96 my-1">
+                                        <input type="checkbox" value="{{ $subject->id }}" name="subjects_array[]" 
+                                            class="mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                            {{ in_array($subject->id, $selected) ? 'checked' : '' }}>
+                                            {{ $subject->name }}
+                                    </div>
+                                @endforeach
+                            </div>
                     </div>
                     <button type="submit">検索</button>
                     
@@ -25,7 +30,7 @@
                         @if (!empty($search_results))
                             @foreach($search_results as $search_result)
                                 <div>
-                                    <a href="/matching/show_profile/{{ $search_result->id }}">
+                                    <a class="text-black hover:text-blue-700 hover:underline hover:underline-offset-2" href="/matching/show_profile/{{ $search_result->id }}">
                                         {{ $search_result->family_name }} {{ $search_result->first_name }}
                                     </a>
                                 </div>
